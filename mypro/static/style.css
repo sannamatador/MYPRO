@@ -1,44 +1,81 @@
-/* styles.css */
 
 body {
-    font-family: Arial, sans-serif;
+
+     background-image: url("423283a2b0089d478492c4b42474fcc3.jpg");
+            background-size: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 400px;
+            width: 400px;
+    font-family: Tahoma; /* Шрифт */
     margin: 0;
+    padding: 15px;
+    font-size: 15px
+}
+
+
+h1 {
+    white-space: nowrap;
+    color: #6A3088; /* Цвет заголовка */
+}
+
+ul {
+    list-style-type: none; /* Убираем маркеры списка */
     padding: 0;
-    background-color: #f4f4f4;
 }
 
-header {
-    background: #35424a;
-    color: #ffffff;
-    padding: 10px 0;
-    text-align: center;
+li {
+    background-color: #fff; /* Цвет фона для постов */
+    margin: 5px 0; /* Отступы между постами */
+    padding: 5px;
+    border-radius: 5px; /* Скругление углов */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень */
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
+.pagination {
+    margin-top: 20px;
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 20px;
+.step-links a {
+    margin: 0 5px;
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #007BFF; /* Цвет ссылок */
 }
 
-nav a {
-    color: #ffffff;
-    text-decoration: none;
+.step-links a:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
 }
 
-main {
-    padding: 20px;
+.current {
+    font-weight: bold; /* Жирный шрифт для текущей страницы */
 }
 
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background: #35424a;
-    color: #ffffff;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+.header-container {
+   width: 100%;
+   overflow: hidden;  / *Для предотвращения переполнения* /
+}
+.product-list {
+    display: flex;
+    flex-direction: column; /* Выстраиваем элементы в колонку */
+    align-items: center; /* Центрируем элементы по горизонтали */
+    margin: 0 auto; /* Центрируем блок на странице */
+    max-width: 800px; /* Ограничиваем ширину */
+}
+
+.product-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px 0; /* Отступы между товарами */
+    width: 100%; /* Ширина товара */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  /* Добавим цвет и ширину блока для наглядности*/
+  background-color:#f1f1f1;
+  width: 100%;
 }

@@ -4,7 +4,13 @@
 <h2>Список товаров</h2>
 <ul>
     {% for product in products %}
-        <li>{{ product.name }} - {{ product.price }} руб. ({{ product.quantity }} в наличии)</li>
+        <li>{{ product.name }} - {{ product.price }} руб. ({{ product.quantity }} в наличии)
+        <form action="{% url 'order_create' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <button type="submit">Купить</button>
+            </form>
+        </li>
     {% endfor %}
 </ul>
 {% endblock %}

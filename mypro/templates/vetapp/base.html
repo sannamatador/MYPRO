@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ветеринарная аптека ВетЭксперт</title>
+   <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
     <header>
@@ -20,8 +23,6 @@
     <main>
         {% block content %}{% endblock %}
     </main>
-    <footer>
-        <p>© 2024 ВетЭксперт</p>
-    </footer>
+   <div class="footer">© 2024 ВетЭксперт</div>
 </body>
 </html>

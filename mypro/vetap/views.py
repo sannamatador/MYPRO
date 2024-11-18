@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import get_user
+from django.contrib.auth.decorators import login_required
 from .models import User, Product, Order
 
 
@@ -49,3 +50,18 @@ def order_view(request):
     user = User.objects.get(id=request.session['user_id'])
     orders = Order.objects.filter(user=user)
     return render(request, 'vetapp/order.html', {'orders': orders})
+
+
+@login_required
+def order_create(request):
+    if request.method == "POST":
+        product_id = request.POST.get('product_id')
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return redirect('product')  # или выведите сообщение об ошибке        # Получаем текущего пользователя
+        user = User.objects.get(id=request.user.id)  # Здесь мы получим реальный экземпляр вашего User        # Создаем новый заказ
+        order = Order(user=user, product=product)
+        order.save()
+        return redirect('order')  # перенаправляем на страницу заказов
+    return redirect('product')  # если не POST, перенаправляем на список товаров

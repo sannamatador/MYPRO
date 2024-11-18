@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from vetap.views import register, user_login, product, order_view,  main, user_logout
+from vetap.views import register, user_login, product, order_view,  main, user_logout, order_create
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +25,6 @@ urlpatterns = [
     path('logout/', user_logout, name='logout'),
     path('product/', product, name='product'),
     path('order/', order_view, name='order'),
+    path('order/create/', order_create, name='order'),
     path('', main, name='main'),
 ]
