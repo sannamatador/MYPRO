@@ -16,14 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from vetap.views import register, user_login, product, order_view,  main
+from vetap.views import register, user_login, product, order_view,  main, user_logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main, name='main'),
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
-    # path('logout/', user_logout, name='logout'),
+    path('logout/', user_logout, name='logout'),
     path('product/', product, name='product'),
     path('order/', order_view, name='order'),
+    path('', main, name='main'),
 ]

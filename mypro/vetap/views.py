@@ -4,7 +4,7 @@ from .models import User, Product, Order
 
 
 def main(request):
-    return render(request, 'base.html')
+    return render(request, 'vetapp/base.html')
 
 
 def register(request):
@@ -13,11 +13,11 @@ def register(request):
         last_name = request.POST['last_name']
         email = request.POST['email']
         if User.objects.filter(email=email).exists():
-            return render(request, 'register.html', {'error': 'Пользователь с таким email уже существует.'})
+            return render(request, 'vetapp/register.html', {'error': 'Пользователь с таким email уже существует.'})
         user = User(first_name=first_name, last_name=last_name, email=email)
         user.save()
-        return render(request, 'success.html', {'first_name': first_name})
-    return render(request, 'register.html')
+        return render(request, 'vetapp/success.html', {'first_name': first_name})
+    return render(request, 'vetapp/register.html')
 
 
 def user_login(request):
@@ -27,20 +27,20 @@ def user_login(request):
             user = User.objects.get(email=email)
 
         except User.DoesNotExist:
-            return render(request, 'login.html', {'error': 'Пользователь не найден.'})
+            return render(request, 'vetapp/login.html', {'error': 'Пользователь не найден.'})
         username = user.first_name
-        return render(request, 'success1.html', {'first_name': username})
-    return render(request, 'login.html')
+        return render(request, 'vetapp/success1.html', {'first_name': username})
+    return render(request, 'vetapp/login.html')
 
 
-# def user_logout(request):
-#     request.session.flush()
-#     return redirect('product.html')
+def user_logout(request):
+    request.session.flush()
+    return redirect('main')
 
 
 def product(request):
     products = Product.objects.all()
-    return render(request, 'product.html', {'products': products})
+    return render(request, 'vetapp/product.html', {'products': products})
 
 
 def order_view(request):
@@ -48,4 +48,4 @@ def order_view(request):
         return redirect('login')
     user = User.objects.get(id=request.session['user_id'])
     orders = Order.objects.filter(user=user)
-    return render(request, 'order.html', {'orders': orders})
+    return render(request, 'vetapp/order.html', {'orders': orders})
