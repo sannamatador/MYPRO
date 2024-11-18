@@ -7,9 +7,9 @@ from .models import Product, Order, User, Cart
 #     list_display = ('name', 'price', 'quantity')  # Убедитесь, что вы добавили нужные поля
 
 
-# admin.site.register(Product)
-# admin.site.register(Order)
-# admin.site.register(User)
-# admin.site.register(Cart)
+admin.site.register(Product)
+admin.site.register(Order)
+admin.site.register(User)
+admin.site.register(Cart)
 
 # Register your models here.
