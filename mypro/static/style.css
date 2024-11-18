@@ -6,7 +6,7 @@ body {
             background-position: center;
             background-size: cover;
             height: 400px;
-            width: 400px;
+            width: 1000px;
     font-family: Tahoma; /* Шрифт */
     margin: 0;
     padding: 15px;
@@ -59,7 +59,7 @@ li {
     flex-direction: column; /* Выстраиваем элементы в колонку */
     align-items: center; /* Центрируем элементы по горизонтали */
     margin: 0 auto; /* Центрируем блок на странице */
-    max-width: 800px; /* Ограничиваем ширину */
+    max-width: 1200px; /* Ограничиваем ширину */
 }
 
 .product-item {

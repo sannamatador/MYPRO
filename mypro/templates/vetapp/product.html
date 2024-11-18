@@ -2,13 +2,16 @@
 
 {% block content %}
 <h2>Список товаров</h2>
+
 <ul>
     {% for product in products %}
-        <li>{{ product.name }} - {{ product.price }} руб. ({{ product.quantity }} в наличии)
-        <form action="{% url 'order_create' %}" method="post">
+        <li>
+            {{ product.name }} - {{ product.price }} руб. ({{ product.quantity }} в наличии)
+            <form action="{% url 'add_to_cart' product.id %}" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{ product.id }}">
-                <button type="submit">Купить</button>
+                <label for="quantity_{{ product.id }}">Количество:</label>
+                <input type="number" name="quantity" id="quantity_{{ product.id }}" min="1" value="1" required>
+                <button type="submit">Добавить в заказ</button>
             </form>
         </li>
     {% endfor %}
