@@ -40,10 +40,3 @@ class Order(models.Model):
     def __str__(self):
         return f"Order {self.id} by {self.user.first_name} - Status: {self.status}"
 
-
-class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product)
-
-    def __str__(self):
-        return f"Cart of {self.user.first_name}"

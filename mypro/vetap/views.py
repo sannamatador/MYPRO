@@ -81,9 +81,7 @@ def order_create(request):
         for product_id, quantity in cart.items():
             product = get_object_or_404(Product, id=product_id)
 
-            if quantity > product.quantity:  # Проверка наличия товара
-                messages.error(request, f"Недостаточно товара: {product.name}")
-                return redirect('product')
+
 
             # Создаем новый заказ
             order = Order(
@@ -94,10 +92,14 @@ def order_create(request):
             )
             order.save()
 
+            # Уменьшаем количество товара после оформления заказа
+            product.quantity -= quantity
+            product.save()  # Сохранение обновленного количества товара
+
         # Очищаем корзину после оформления заказа
         del request.session['cart']
         messages.success(request, "Ваш заказ оформлен! Спасибо за покупку.")
-        return redirect('order_create')  # Перенаправляем на просмотр заказов
+        return redirect('order_success')  # Перенаправляем на просмотр заказов
 
     return redirect('product')  # Возвращаем, если метод не POST
 
@@ -107,6 +109,9 @@ def add_to_cart(request, product_id):
 
     if request.method == 'POST':
         quantity = int(request.POST.get('quantity', 1))  # Получаем количество из формы, по умолчанию 1
+        if quantity > product.quantity:  # Проверка наличия товара
+            messages.error(request, f"Недостаточно товара: {product.name}")
+            return redirect('product')
         if quantity < 1:
             quantity = 1  # Убедимся, что количество положительное
 
@@ -122,3 +127,7 @@ def add_to_cart(request, product_id):
         return redirect('product')  # Возвращаем на страницу с товарами
 
     return redirect('product')  # Если GET-запрос, возвращаем на страницу
+
+
+def order_success(request):
+    return render(request, 'vetapp/order_create.html')

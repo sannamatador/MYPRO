@@ -16,4 +16,11 @@
         </li>
     {% endfor %}
 </ul>
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            <p class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
 {% endblock %}
