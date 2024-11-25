@@ -2,7 +2,7 @@ from django import forms
 from .models import User
 
 
-class RegistrationForm(forms.ModelForm):
+class RegistrationForm(forms.ModelForm):  # Форма для регистрации пользователей
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']  # Указываем поля: имя, фамилия и email

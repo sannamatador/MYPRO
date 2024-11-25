@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from .models import User, Product, Order
 
 
-def main(request):
+def main(request):  # Главная страница
     return render(request, 'vetapp/base.html')
 
 
-def register(request):
+def register(request):  # Регистрация пользователей
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -44,12 +43,12 @@ def user_logout(request):
     return redirect('main')
 
 
-def product(request):
+def product(request):  # Список товаров
     products = Product.objects.all()
     return render(request, 'vetapp/product.html', {'products': products})
 
 
-def order_view(request):
+def order_view(request):  # Просмотр заказа
     if 'user_id' not in request.session:
         return redirect('login')  # Если пользователь не авторизован, перенаправляем на страницу входа
 
@@ -68,7 +67,7 @@ def order_view(request):
     })
 
 
-def order_create(request):
+def order_create(request):  # Оформление заказа
     if request.method == "POST":
         user_id = request.session.get('user_id')
         user = get_object_or_404(User, id=user_id)
@@ -104,7 +103,7 @@ def order_create(request):
     return redirect('product')  # Возвращаем, если метод не POST
 
 
-def add_to_cart(request, product_id):
+def add_to_cart(request, product_id): # Добавление товаров в заказ
     product = get_object_or_404(Product, id=product_id)  # Получаем товар по ID
 
     if request.method == 'POST':
